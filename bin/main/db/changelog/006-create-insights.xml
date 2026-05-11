@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="006-create-insights" author="copilot">
+        <sql>
+            CREATE TABLE insights (
+                id UUID PRIMARY KEY,
+                user_id UUID NOT NULL,
+                type VARCHAR(50) NOT NULL,
+                title VARCHAR(255) NOT NULL,
+                content TEXT NOT NULL,
+                period_year INT NOT NULL,
+                period_month INT NOT NULL,
+                relevance_score DECIMAL(5,2),
+                status VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',
+                expires_at TIMESTAMP,
+                created_at TIMESTAMP NOT NULL DEFAULT NOW()
+            );
+            CREATE INDEX idx_insights_user_active ON insights(user_id, status, created_at DESC);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

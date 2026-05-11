@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="002-create-conversation-sessions" author="copilot">
+        <sql>
+            CREATE TABLE conversation_sessions (
+                id UUID PRIMARY KEY,
+                user_id UUID NOT NULL,
+                title VARCHAR(255),
+                summary TEXT,
+                status VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',
+                created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+                updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+            );
+            CREATE INDEX idx_sessions_user_status ON conversation_sessions(user_id, status);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <include file="db/changelog/001-create-pgvector-extension.xml"/>
+    <include file="db/changelog/002-create-conversation-sessions.xml"/>
+    <include file="db/changelog/003-create-chat-messages.xml"/>
+    <include file="db/changelog/004-create-embedded-documents.xml"/>
+    <include file="db/changelog/005-create-ingestion-checkpoints.xml"/>
+    <include file="db/changelog/006-create-insights.xml"/>
+
+</databaseChangeLog>

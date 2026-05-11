@@ -1,0 +1,99 @@
+spring:
+  application:
+    name: advisor-service
+  threads:
+    virtual:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o-mini
+          max-tokens: 1024
+          temperature: 0.3
+      embedding:
+        options:
+          model: text-embedding-3-small
+  kafka:
+    consumer:
+      group-id: advisor-ingestion
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.wisewallet.advisor.infrastructure.messaging.event
+  data:
+    web:
+      pageable:
+        max-page-size: 100
+        default-page-size: 10
+
+server:
+  port: 8084
+  error:
+    include-message: always
+    include-binding-errors: never
+
+management:
+  server:
+    port: ${MANAGEMENT_PORT:8094}
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+wisewallet:
+  advisor:
+    enabled: ${ADVISOR_ENABLED:true}
+    kafka:
+      topics:
+        txn-categorized: txn.categorized
+        txn-categorized-dlt: txn.categorized.DLT
+      concurrency: 3
+    retrieval:
+      top-k: 5
+      min-similarity: 0.3
+    ingestion:
+      embedding-batch-size: 20
+      poll-interval-ms: 300000
+      debounce-seconds: 30
+    chat:
+      max-message-length: 2000
+      rate-limit-per-minute: 10
+      session-max-active: 20
+      summarization-threshold: 5
+    insights:
+      rate-limit-per-minute: 5
+      cache-ttl-hours: 4
+      generation-cron: "0 0 6 * * *"
+    session:
+      cleanup-inactive-days: 30
+      cleanup-cron: "0 0 2 * * *"
+    account-service-url: ${ACCOUNT_SERVICE_URL:http://localhost:8081}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+    display-request-duration: true
+
+logging:
+  level:
+    com.wisewallet: INFO

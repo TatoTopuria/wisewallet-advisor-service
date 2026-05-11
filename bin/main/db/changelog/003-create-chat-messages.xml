@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="003-create-chat-messages" author="copilot">
+        <sql>
+            CREATE TABLE chat_messages (
+                id UUID PRIMARY KEY,
+                session_id UUID NOT NULL REFERENCES conversation_sessions(id),
+                role VARCHAR(20) NOT NULL,
+                content TEXT NOT NULL,
+                token_count INT,
+                turn_number INT NOT NULL,
+                created_at TIMESTAMP NOT NULL DEFAULT NOW()
+            );
+            CREATE INDEX idx_messages_session_turn ON chat_messages(session_id, turn_number);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

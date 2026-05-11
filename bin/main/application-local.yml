@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5435/wisewallet_advisor
+    username: postgres
+    password: ${DB_PASSWORD:dev_password}
+  kafka:
+    bootstrap-servers: localhost:9092
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+wisewallet:
+  advisor:
+    account-service-url: http://localhost:8081
+
+logging:
+  level:
+    com.wisewallet: DEBUG

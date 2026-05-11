@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="004-create-embedded-documents" author="copilot">
+        <sql>
+            CREATE TABLE embedded_documents (
+                id UUID PRIMARY KEY,
+                user_id UUID NOT NULL,
+                chunk_key VARCHAR(100) NOT NULL,
+                content TEXT NOT NULL,
+                embedding vector(1536) NOT NULL,
+                year INT NOT NULL,
+                month INT NOT NULL,
+                version INT NOT NULL DEFAULT 1,
+                created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+                updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+                CONSTRAINT uq_embedded_user_chunk UNIQUE(user_id, chunk_key)
+            );
+
+            CREATE INDEX idx_embedded_user ON embedded_documents(user_id);
+            CREATE INDEX idx_embedded_hnsw ON embedded_documents
+                USING hnsw (embedding vector_cosine_ops)
+                WITH (m = 16, ef_construction = 64);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
