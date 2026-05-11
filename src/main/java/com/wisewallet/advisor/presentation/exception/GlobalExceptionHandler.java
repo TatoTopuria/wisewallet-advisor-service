@@ -4,6 +4,7 @@ import com.wisewallet.advisor.domain.exception.AdvisorDisabledException;
 import com.wisewallet.advisor.domain.exception.BusinessRuleException;
 import com.wisewallet.advisor.domain.exception.LlmServiceUnavailableException;
 import com.wisewallet.advisor.domain.exception.RateLimitExceededException;
+import com.wisewallet.advisor.domain.exception.SessionAccessDeniedException;
 import com.wisewallet.advisor.domain.exception.SessionNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
@@ -58,6 +59,14 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest()
                 .body(errorBody(400, "Bad Request", "Validation failed", request.getRequestURI(), errors));
+    }
+
+    @ExceptionHandler(SessionAccessDeniedException.class)
+    public ResponseEntity<Map<String, Object>> handleAccessDenied(
+            SessionAccessDeniedException ex, HttpServletRequest request) {
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(errorBody(403, "Forbidden", ex.getMessage(), request.getRequestURI(), null));
     }
 
     @ExceptionHandler(SessionNotFoundException.class)

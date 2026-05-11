@@ -1,5 +1,7 @@
 package com.wisewallet.advisor.application.query;
 
+import com.wisewallet.advisor.domain.exception.SessionAccessDeniedException;
+import com.wisewallet.advisor.domain.exception.SessionNotFoundException;
 import com.wisewallet.advisor.domain.model.ChatMessage;
 import com.wisewallet.advisor.domain.model.ConversationSession;
 import com.wisewallet.advisor.domain.model.SessionStatus;
@@ -28,7 +30,14 @@ public class SessionQueryService {
         return sessionRepository.findByUserIdAndStatus(userId, SessionStatus.ACTIVE, pageable);
     }
 
-    public List<ChatMessage> getMessages(UUID sessionId) {
+    public List<ChatMessage> getMessages(UUID userId, UUID sessionId) {
+        ConversationSession session = sessionRepository.findById(sessionId)
+                .orElseThrow(() -> new SessionNotFoundException(sessionId));
+
+        if (!session.getUserId().equals(userId)) {
+            throw new SessionAccessDeniedException(sessionId);
+        }
+
         return messageRepository.findBySessionIdOrderByTurnNumberAsc(sessionId);
     }
 }

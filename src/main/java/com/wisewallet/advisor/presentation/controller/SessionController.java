@@ -35,6 +35,6 @@ public class SessionController {
     @GetMapping("/{sessionId}/messages")
     public List<ChatMessageResponse> getMessages(@RequestHeader("X-User-Id") UUID userId,
                                                  @PathVariable UUID sessionId) {
-        return sessionQueryService.getMessages(sessionId).stream().map(sessionMapper::toResponse).toList();
+        return sessionQueryService.getMessages(userId, sessionId).stream().map(sessionMapper::toResponse).toList();
     }
 }

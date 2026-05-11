@@ -11,6 +11,9 @@ spring:
       port: 6379
 
 wisewallet:
+  internal:
+    jwt:
+      secret: ${INTERNAL_JWT_SECRET:local-dev-internal-jwt-secret-needs-32chars!}
   advisor:
     account-service-url: http://localhost:8081
 

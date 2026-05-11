@@ -12,6 +12,7 @@ wiremock                   = "3.10.0"
 archunit                   = "1.3.0"
 springdoc-openapi          = "2.8.3"
 hypersistence-utils        = "3.9.0"
+jjwt                       = "0.12.6"
 
 [plugins]
 springBoot    = { id = "org.springframework.boot",          version.ref = "spring-boot" }
@@ -34,8 +35,14 @@ spring-boot-starter-data-redis      = { module = "org.springframework.boot:sprin
 spring-boot-starter-validation      = { module = "org.springframework.boot:spring-boot-starter-validation" }
 spring-boot-starter-actuator        = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 spring-boot-starter-kafka           = { module = "org.springframework.kafka:spring-kafka" }
+spring-boot-starter-security        = { module = "org.springframework.boot:spring-boot-starter-security" }
 spring-cloud-starter-openfeign      = { module = "org.springframework.cloud:spring-cloud-starter-openfeign" }
 spring-ai-openai-starter            = { module = "org.springframework.ai:spring-ai-starter-openai" }
+
+# JJWT
+jjwt-api                           = { module = "io.jsonwebtoken:jjwt-api",     version.ref = "jjwt" }
+jjwt-impl                          = { module = "io.jsonwebtoken:jjwt-impl",    version.ref = "jjwt" }
+jjwt-jackson                       = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jjwt" }
 
 resilience4j-spring-boot3          = { module = "io.github.resilience4j:resilience4j-spring-boot3", version.ref = "resilience4j" }
 resilience4j-feign                 = { module = "io.github.resilience4j:resilience4j-feign", version.ref = "resilience4j" }

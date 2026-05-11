@@ -35,6 +35,7 @@ dependencies {
     annotationProcessor(libs.mapstruct.processor)
 
     implementation(libs.spring.boot.starter.web)
+    implementation(libs.spring.boot.starter.security)
     implementation(libs.spring.boot.starter.data.jpa)
     implementation(libs.spring.boot.starter.data.redis)
     implementation(libs.spring.boot.starter.validation)
@@ -45,6 +46,10 @@ dependencies {
 
     implementation(libs.resilience4j.spring.boot3)
     implementation(libs.resilience4j.feign)
+
+    implementation(libs.jjwt.api)
+    runtimeOnly(libs.jjwt.impl)
+    runtimeOnly(libs.jjwt.jackson)
 
     runtimeOnly(libs.postgresql)
     implementation(libs.liquibase.core)
