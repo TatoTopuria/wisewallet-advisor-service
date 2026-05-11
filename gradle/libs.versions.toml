@@ -35,7 +35,7 @@ spring-boot-starter-validation      = { module = "org.springframework.boot:sprin
 spring-boot-starter-actuator        = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 spring-boot-starter-kafka           = { module = "org.springframework.kafka:spring-kafka" }
 spring-cloud-starter-openfeign      = { module = "org.springframework.cloud:spring-cloud-starter-openfeign" }
-spring-ai-openai-starter            = { module = "org.springframework.ai:spring-ai-openai-spring-boot-starter" }
+spring-ai-openai-starter            = { module = "org.springframework.ai:spring-ai-starter-openai" }
 
 resilience4j-spring-boot3          = { module = "io.github.resilience4j:resilience4j-spring-boot3", version.ref = "resilience4j" }
 resilience4j-feign                 = { module = "io.github.resilience4j:resilience4j-feign", version.ref = "resilience4j" }
