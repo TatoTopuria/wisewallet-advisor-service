@@ -37,7 +37,7 @@ spring-boot-starter-actuator        = { module = "org.springframework.boot:sprin
 spring-boot-starter-kafka           = { module = "org.springframework.kafka:spring-kafka" }
 spring-boot-starter-security        = { module = "org.springframework.boot:spring-boot-starter-security" }
 spring-cloud-starter-openfeign      = { module = "org.springframework.cloud:spring-cloud-starter-openfeign" }
-spring-ai-openai-starter            = { module = "org.springframework.ai:spring-ai-starter-openai" }
+spring-ai-openai-starter            = { module = "org.springframework.ai:spring-ai-starter-model-openai" }
 
 # JJWT
 jjwt-api                           = { module = "io.jsonwebtoken:jjwt-api",     version.ref = "jjwt" }
