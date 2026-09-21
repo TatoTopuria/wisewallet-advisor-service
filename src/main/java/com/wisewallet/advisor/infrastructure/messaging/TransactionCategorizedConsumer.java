@@ -2,7 +2,7 @@ package com.wisewallet.advisor.infrastructure.messaging;
 
 import com.wisewallet.advisor.application.command.IngestionCommandService;
 import com.wisewallet.advisor.application.command.IngestionEventData;
-import com.wisewallet.advisor.infrastructure.config.AdvisorProperties;
+import com.wisewallet.advisor.application.config.AdvisorProperties;
 import com.wisewallet.advisor.infrastructure.messaging.event.TransactionCategorizedEvent;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;

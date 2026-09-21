@@ -1,4 +1,4 @@
-package com.wisewallet.advisor.infrastructure.config;
+package com.wisewallet.advisor.application.config;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

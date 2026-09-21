@@ -1,7 +1,7 @@
 package com.wisewallet.advisor.infrastructure.messaging;
 
 import com.wisewallet.advisor.application.command.IngestionCommandService;
-import com.wisewallet.advisor.infrastructure.config.AdvisorProperties;
+import com.wisewallet.advisor.application.config.AdvisorProperties;
 import com.wisewallet.advisor.infrastructure.config.KafkaConsumerConfig;
 import com.wisewallet.advisor.infrastructure.messaging.event.TransactionCategorizedEvent;
 import org.apache.kafka.clients.consumer.Consumer;
@@ -155,7 +155,11 @@ class TransactionCategorizedDltIntegrationTest {
     }
 
     @TestConfiguration
-    @EnableAutoConfiguration
+    @EnableAutoConfiguration(exclude = {
+            org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration.class,
+            org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration.class,
+            org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration.class
+    })
     @EnableKafka
     @EnableConfigurationProperties(AdvisorProperties.class)
     @Import({KafkaConsumerConfig.class, TransactionCategorizedConsumer.class, KafkaCorrelationIdConsumerHelper.class})

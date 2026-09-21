@@ -1,7 +1,7 @@
 package com.wisewallet.advisor.application.query;
 
 import com.wisewallet.advisor.application.shared.RateLimitService;
-import com.wisewallet.advisor.infrastructure.config.AdvisorProperties;
+import com.wisewallet.advisor.application.config.AdvisorProperties;
 import com.wisewallet.advisor.presentation.dto.response.InsightsEnvelope;
 import org.springframework.stereotype.Service;
 

@@ -5,7 +5,7 @@ import com.wisewallet.advisor.domain.exception.SessionAccessDeniedException;
 import com.wisewallet.advisor.domain.exception.SessionNotFoundException;
 import com.wisewallet.advisor.domain.model.ConversationSession;
 import com.wisewallet.advisor.domain.repository.ConversationSessionRepositoryPort;
-import com.wisewallet.advisor.infrastructure.config.AdvisorProperties;
+import com.wisewallet.advisor.application.config.AdvisorProperties;
 import com.wisewallet.advisor.presentation.dto.response.ChatStreamEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;

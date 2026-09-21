@@ -1,6 +1,7 @@
 package com.wisewallet.advisor.infrastructure.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wisewallet.advisor.application.config.AdvisorProperties;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
