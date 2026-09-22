@@ -12,7 +12,7 @@ spring:
     change-log: classpath:db/changelog/db.changelog-master.xml
   ai:
     openai:
-      api-key: ${OPENAI_API_KEY}
+      api-key: ${OPENAI_API_KEY:test-openai-key}
       chat:
         options:
           model: gpt-4o-mini
@@ -59,7 +59,7 @@ management:
 wisewallet:
   internal:
     jwt:
-      secret: ${INTERNAL_JWT_SECRET}
+      secret: ${INTERNAL_JWT_SECRET:default-internal-jwt-secret-min-32-chars-for-test!}
   advisor:
     enabled: ${ADVISOR_ENABLED:true}
     kafka:

@@ -15,10 +15,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -72,7 +72,7 @@ class TransactionCategorizedDltIntegrationTest {
     @Autowired
     private EmbeddedKafkaBroker embeddedKafkaBroker;
 
-    @MockBean
+    @Autowired
     private IngestionCommandService ingestionCommandService;
 
     private KafkaTemplate<String, TransactionCategorizedEvent> producer;
@@ -80,6 +80,7 @@ class TransactionCategorizedDltIntegrationTest {
 
     @BeforeEach
     void setUp() {
+        org.mockito.Mockito.reset(ingestionCommandService);
         doThrow(new IllegalStateException("forced ingestion failure"))
                 .when(ingestionCommandService)
                 .handleTransactionCategorized(any());
@@ -154,7 +155,7 @@ class TransactionCategorizedDltIntegrationTest {
         return null;
     }
 
-    @TestConfiguration
+    @SpringBootConfiguration
     @EnableAutoConfiguration(exclude = {
             org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration.class,
             org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration.class,
@@ -164,5 +165,9 @@ class TransactionCategorizedDltIntegrationTest {
     @EnableConfigurationProperties(AdvisorProperties.class)
     @Import({KafkaConsumerConfig.class, TransactionCategorizedConsumer.class, KafkaCorrelationIdConsumerHelper.class})
     static class KafkaTestApp {
+        @Bean
+        public IngestionCommandService ingestionCommandService() {
+            return org.mockito.Mockito.mock(IngestionCommandService.class);
+        }
     }
 }
